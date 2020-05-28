@@ -1,0 +1,45 @@
+;https://htdp.org/2019-02-24/part_one.html#%28part._.D.K._sec~3adesign-world%29
+
+Design recipe for world program consists of 4 steps.
+
+(1) identify the properties of the world that remain the same
+over time. We call these constants. There are to kinds of
+constants
+
+I Physical constants
+- describe general attributes of objects in the world
+- e.g height of an object, velocity of object
+
+II Graphical constants
+- a composition of images that represent the complete
+state of the world
+- to develop such constants, use the interaction area
+to make images until you find one that looks nice.
+
+(2) Develop a data representation for all possible states of
+the world. This is where you supply a data definition.
+It should be clear how
+a) information can be represented as data
+b) data can be interpreted about the real world
+
+(3) Design wish list of function.
+You can use the template below to for this wishlist
+and adopt it your program. Remember, each wish list entry
+consists of a signature and purpose statement. Usually,
+you will start with
+
+a) render (maps world state to image)
+b) clock-tick-handler
+c) keystroke-handler
+d) moust-event-handler
+e) end? (what state of the world means progarm should end)
+
+(4) design a main function. Its sole purpose is to launch
+the world program.
+
+Almost every world program you write
+will have the functions below.
+
+When you design new world programs you should use this template
+changing the data definitions to suit the needs of your
+problem.
