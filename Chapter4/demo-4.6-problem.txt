@@ -1,0 +1,16 @@
+Taco shop has 3 different types of tacos
+each the same price.
+
+On tuesday tacos are only 1.00 
+every other day they are 1.50.
+
+A customer can order a combo box which means
+they get 9 tacos at .99 each, regardless of what 
+day it is. 
+
+Your task is come up with a function to calculate
+the cost of an order based on the quantity of tacos
+ordered and what day of the week it is.
+
+Come up with a data definition to capture 
+the information in the problem.
