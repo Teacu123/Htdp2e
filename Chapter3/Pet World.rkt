@@ -1,0 +1,64 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |Pet World|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/image)
+; 47 Happiness gauge
+(require 2htdp/universe)
+
+; HappyState is a number
+; it represents the current hapopiness level of the cat.
+; this level is between 0 and 100 where 100 is most happy
+; Data Representation: "Happy"
+
+(define WIDTH 500)
+(define HEIGHT 100)
+(define BAR-Y (/ HEIGHT 2))
+(define SCENE (empty-scene WIDTH HEIGHT))
+;factor of how much happiness decreases by
+(define HDECREASE .33)
+(define SMHAPPY 1/3)
+(define LGHAPPY 1/5)
+; max happiness amount is 100
+(define GAUGE-SCALE (/ WIDTH 100))
+
+; tick-handler
+; HappyState -> HappyState
+; HappyState is a number between 0 and 100
+; purpose: makes the happyness bar decrease by HDCREASE
+(define (create-happy-bar hs)
+  (rectangle (calculate-happy-bar-width hs) HEIGHT "solid" "red"))
+
+; function to make the bar proportional
+(define (calculate-happy-bar-width hs)
+  (* hs (/ WIDTH 100)))
+
+(check-expect (calculate-happy-bar-width 100)
+              (* 100 (/ WIDTH 100)))
+
+; decrease function
+; HappyState -> Number
+; purpose: decreases until bar's width = 0, increases when up or down arrow is pressed
+(define (decreasingBar hs)
+  (cond
+    [(> hs 0) (- hs (* hs HDECREASE))]
+    [(= hs 0) 0]))
+
+(define (increase-happy hs key)
+  (cond
+    [(key=? key "up")    (+ hs (* hs SMHAPPY))]
+    [(key=? key "down")  (+ hs (* hs LGHAPPY))]))             
+
+;render function
+;purpose: to place the image and every time it decreases on the SCENE
+;question: how do yo umake it so that you can place it perfectly with the height?
+(define (render hs)
+  (place-image/align (create-happy-bar hs) 0 BAR-Y "left" "center" SCENE))
+
+(define (main hs)
+  (big-bang hs
+    [to-draw render]
+    [on-tick decreasingBar 1] ;clock ticks once per second (easier to see what is going on)
+    [on-key increase-happy]))
+
+
+(main 100)

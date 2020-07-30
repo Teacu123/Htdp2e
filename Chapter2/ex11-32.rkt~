@@ -9,12 +9,42 @@
 ; dropbox folder.
 (define belle (bitmap "../assets/belle.png"))
 
+;11
+(define (distance-to-origin x y)
+  (sqrt (+ (* x x)  (* y y))))
 
+(distance-to-origin 3 4) ; 5
+
+;12
+(define (cvolume length)
+  (* length length length))
+(cvolume 3) ; 27
+  
 ;13
 (define (string-first s)
   (string-ith s 0))
 (string-first "cat") ;c
 
+;14
+(define (string-last s)
+  (string-ith s (- (string-length s) 1)))
+(string-last "cat")
+
+;15
+(define (==> sunny friday)
+  (or (not sunny) friday))
+(==> #true #false) ; this is the only case that returns false
+
+;16
+(define (image-area img)
+  (* (image-height img) (image-width img)))
+(image-area belle)
+
+;17
+(define (classify img)
+  (if (< (image-width img) (image-height img)) "tall" "wide"))
+(classify (rectangle 20 30 "outline" "blue")) ; tall
+(classify (rectangle 30 20 "outline" "blue")) ; wide
 
 ;18
 (define (string-join s1 s2)
@@ -27,19 +57,14 @@
 (string-insert "cats" 2) ; ca_ts
 
 ;20
-
+; without using an if statement there is no way to
+; handle the case of the empty string
 (define (string-delete s i)
   (string-append
-   (substring s 0 (max i 0))
-   (substring s (min (+ i 1) (string-length s)))))
+   (substring s 0 i)
+   (substring s (+ i (if (= (string-length s) 0) 0 1)))))
 (string-delete "" 0) ; ""
 (string-delete "cat" 0) ;at
-
-; String -> String
-; remove the last character from a string
-(define (string-last s)
-  (string-delete s (- (string-length s) 1)))
-
 
 ;27-31
 ; a reference price. 
