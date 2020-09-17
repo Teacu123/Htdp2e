@@ -20,3 +20,5 @@
   (big-bang initial-state
     [to-draw tl-render]
     [on-tick tl-next 1]))
+
+(make-posn 4 5)
