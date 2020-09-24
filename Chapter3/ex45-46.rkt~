@@ -1,13 +1,11 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname ex45-46) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-; cat should be lower
-
 (require 2htdp/image)
 (require 2htdp/universe)
 
-(define SN-WIDTH 300)
-(define SN-HEIGHT 300)
+(define SN-WIDTH 100)
+(define SN-HEIGHT 50)
 (define SN-MID-Y (/ SN-HEIGHT 2))
 (define SN (empty-scene SN-WIDTH SN-HEIGHT))
 ; Change in CAT's x each clock tic 
@@ -21,12 +19,12 @@
 ; this number must be an integer
 (define SN-EDGE (ceiling (+ SN-WIDTH HALF-CAT-WIDTH)))
 
-
-; WorldState is a Number
-; Interpretation
-; the ws represents the position of the center x of the cat.
-; this number is always between 0 and SN-WIDTH + HALF-CAT-WIDTH
-
+#|
+WorldState is a Number
+Interpretation
+the ws represents the position of the center x of the cat.
+this number is always between 0 and SN-WIDTH + HALF-CAT-WIDTH
+|#
 
 ; Number -> Number
 ; Calculate the position of the cat based on the previous position
