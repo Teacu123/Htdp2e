@@ -9,7 +9,7 @@
 (define W (image-width BG))
 (define H (image-height BG))
 (define SN (empty-scene W H))
-(define DELUFO 5)
+(define DELUFO 3)
 (define TANK-DX 4)
 (define DELMIS (* DELUFO 3))
 (define BG-POS (make-posn 0 0))
@@ -53,7 +53,7 @@
 
 
 ; colission threshold
-(define C (- (/ (image-width ENEMY) 2) 14))
+(define C (- (/ (image-width ENEMY) 2) 1))
 
 ; A SIGS is one of: 
 ; – (make-aim UFO Tank)
