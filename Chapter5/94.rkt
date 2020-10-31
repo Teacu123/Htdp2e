@@ -50,6 +50,8 @@
 (define-struct aim [ufo tank])
 (define-struct fired [ufo tank missile])
 
+
+
 ; colission threshold
 (define C (- (/ (image-width ENEMY) 2) 14))
 
@@ -167,6 +169,12 @@
                       (posn-y(fired-missile sig))))
        (at-bottom? sig))]))
 
+;SIGS -> image
+;show end scene
+(define (last-scene sig)
+  (place-image BOOM (posn-x (fired-ufo sig)) (posn-y(fired-ufo sig)) (render sig)))
+(last-scene fired1)
+
 ; examples
 ;(0,0), (5,5)
 ; x1, y1, x2,y2
@@ -182,10 +190,10 @@
    (<= distance C))
   
 
-(check-expect (collison? 30)
-              (<= 30 C))
-(check-expect (collison? C)
-              (not(<= (+ C 1) C)))
+;(check-expect (collison? 30)
+ ;             (<= 30 C))
+;(check-expect (collison? C)
+ ;             (not(<= (+ C 1) C)))
 ;SIGS -> SIGS
 ;Compute the move of sigs and make new sigs which is added the moves
 (define (si-move sig)
@@ -195,7 +203,7 @@
                  (aim-tank sig))]
     [(fired? sig) (make-fired (make-posn (posn-x(fired-ufo sig)) (+ (posn-y(fired-ufo sig))DELUFO))
                               (fired-tank sig)
-                              (make-posn (posn-x(fired-ufo sig))(- (posn-y(fired-missile sig))DELMIS)))]))
+                              (make-posn (posn-x(fired-missile sig))(- (posn-y(fired-missile sig))DELMIS)))]))
 
 ;SIGS->TANK
 ;Make new SIGS which is computed moves of tank
@@ -242,7 +250,7 @@
     [on-tick si-move]
     [to-draw render]
     [on-key si-onkey]
-    [stop-when si-game-over]))
+    [stop-when si-game-over last-scene]))
 
 (main start)
 
